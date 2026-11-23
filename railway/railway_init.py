@@ -54,6 +54,9 @@ def connect():
 
 
 def migrate():
+    # SQLBot's migrations use pgvector.sqlalchemy without importing it; the app
+    # imports it as a side effect of loading its models, so do the same here.
+    import pgvector.sqlalchemy  # noqa: F401
     from alembic import command
     from alembic.config import Config
 
